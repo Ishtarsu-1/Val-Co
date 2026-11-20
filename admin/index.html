@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Mon espace · Atelier Val & Co</title>
+  <link rel="icon" href="/assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500&family=Allura&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body { padding-bottom: 80px; }
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); margin-bottom: 32px; }
+    .top img { height: 48px; width: auto; }
+    .top h1 { font-size: 1.6rem; margin: 0; }
+    .tabs { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+    .tabs .btn[aria-selected="false"] { background: transparent; color: var(--bronze); }
+    .hint { color: var(--muted); margin-bottom: 24px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+    .card { background: var(--cream); border-radius: var(--radius); box-shadow: var(--shadow-1); overflow: hidden; display: flex; flex-direction: column; }
+    .card img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: var(--paper); }
+    .card--gal img { aspect-ratio: 1; }
+    .card__body { padding: 14px 16px; display: grid; gap: 4px; flex: 1; }
+    .card__body strong { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; color: var(--bronze); line-height: 1.2; }
+    .card__body span { color: var(--muted); font-size: .9rem; }
+    .card__actions { display: flex; gap: 6px; padding: 0 12px 12px; flex-wrap: wrap; }
+    .mini { min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; font: 400 .85rem var(--sans); transition: background .2s, border-color .2s; }
+    .mini:hover { border-color: var(--bronze-soft); background: var(--cream); }
+    .mini:focus-visible { outline: 2px solid var(--bronze-soft); outline-offset: 2px; }
+    .mini--danger { color: var(--error); }
+    .mini--grow { flex: 1; }
+    .add { border: 2px dashed rgb(var(--bronze-rgb) / .3); background: transparent; border-radius: var(--radius); min-height: 260px; display: grid; place-items: center; gap: 8px; cursor: pointer; color: var(--bronze); font: 400 1rem var(--sans); transition: background .2s, border-color .2s; }
+    .add:hover, .add:focus-visible { background: var(--cream); border-color: var(--bronze); }
+    .add b { font: 500 2.6rem/1 var(--serif); }
+    .legend { width: 100%; min-height: 44px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 4px; background: var(--paper); font: 300 .95rem var(--sans); color: var(--ink); }
+    .legend:focus { outline: none; border-color: var(--bronze); }
+    dialog { border: 0; border-radius: 10px; padding: 0; width: min(560px, 100% - 24px); max-height: calc(100dvh - 24px); background: var(--cream); color: var(--ink); box-shadow: var(--shadow-3); }
+    dialog::backdrop { background: rgb(var(--ink-rgb) / .45); }
+    dialog form { padding: 24px; display: grid; gap: 16px; }
+    dialog h2 { font-size: 1.8rem; }
+    .photo-pick { display: grid; grid-template-columns: 110px 1fr; gap: 16px; align-items: center; }
+    .photo-pick img { width: 110px; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 6px; background: var(--paper); border: 1px solid var(--line); }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .field small { color: var(--muted); font-size: .82rem; line-height: 1.4; }
+    .dialog__foot { display: flex; justify-content: flex-end; gap: 10px; margin-top: 8px; }
+    .toast { position: fixed; left: 50%; bottom: 24px; translate: -50% 120px; background: var(--bronze); color: var(--cream); padding: 14px 22px; border-radius: 999px; box-shadow: var(--shadow-2); transition: translate .35s var(--ease); z-index: 300; max-width: calc(100% - 32px); }
+    .toast.is-on { translate: -50% 0; }
+    .toast.is-error { background: var(--error); }
+    .busy { opacity: .5; pointer-events: none; }
+    @media (max-width: 560px) { .row { grid-template-columns: 1fr; } .top h1 { display: none; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="top">
+      <a href="/" aria-label="Retour au site"><img src="/assets/logo-atelier.png" alt="Atelier Val & Co"></a>
+      <h1>Mon espace</h1>
+      <a class="btn btn--ghost" href="/" target="_blank" rel="noopener">Voir le site</a>
+    </header>
+
+    <div class="tabs" role="tablist">
+      <button class="btn" role="tab" aria-selected="true" aria-controls="tab-produits" id="t-produits">Mes produits</button>
+      <button class="btn" role="tab" aria-selected="false" aria-controls="tab-galerie" id="t-galerie">Ma galerie</button>
+    </div>
+
+    <section id="tab-produits" role="tabpanel" aria-labelledby="t-produits">
+      <p class="hint">Les produits apparaissent sur la page « Objets personnalisés », dans cet ordre. Tout est enregistré automatiquement.</p>
+      <div class="grid" id="produits"></div>
+    </section>
+
+    <section id="tab-galerie" role="tabpanel" aria-labelledby="t-galerie" hidden>
+      <p class="hint">Les photos de vos réalisations, sur la page « Décoration florale ». Écrivez une légende sous chaque photo si vous le souhaitez.</p>
+      <div class="grid" id="galerie"></div>
+      <input type="file" id="gal-files" accept="image/*" multiple hidden>
+    </section>
+  </div>
+
+  <dialog id="dlg">
+    <form method="dialog" id="pform">
+      <h2 id="dlg-title">Nouveau produit</h2>
+      <div class="photo-pick">
+        <img id="p-preview" alt="Aperçu de la photo">
+        <div class="field">
+          <label for="p-file">Photo *</label>
+          <input type="file" id="p-file" accept="image/*">
+          <small>Prenez de préférence une photo en hauteur.</small>
+        </div>
+      </div>
+      <div class="field"><label for="p-nom">Nom *</label><input id="p-nom" required maxlength="120" placeholder="ex. Bougie parfumée prénom"></div>
+      <div class="row">
+        <div class="field"><label for="p-prix">Prix *</label><input id="p-prix" required maxlength="40" placeholder="ex. 24 € ou dès 35 €"></div>
+        <div class="field"><label for="p-cat">Catégorie *</label>
+          <select id="p-cat"><option value="bougies">Bougies</option><option value="deco">Déco & céramique</option><option value="mariage">Mariage</option><option value="cadeaux">Coffrets cadeaux</option></select>
+        </div>
+      </div>
+      <div class="field"><label for="p-desc">Description</label><textarea id="p-desc" maxlength="600" rows="3" placeholder="Deux phrases courtes suffisent"></textarea></div>
+      <div class="field"><label for="p-badge">Petite étiquette sur la photo</label><input id="p-badge" maxlength="40" placeholder="ex. Nouveau (facultatif)"></div>
+      <div class="field"><label for="p-lien">Lien vers ce produit sur la boutique</label><input id="p-lien" type="url" maxlength="500" placeholder="https://…" pattern="https://.*"><small>Facultatif : sans lien, le bouton mène à l’accueil de la boutique.</small></div>
+      <div class="dialog__foot">
+        <button class="btn btn--ghost" type="button" id="p-cancel">Annuler</button>
+        <button class="btn" type="submit" id="p-save">Enregistrer</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+const src = u => (/^https?:/.test(u) ? u : '/' + u);
+const CAT = { bougies: 'Bougies', deco: 'Déco & céramique', mariage: 'Mariage', cadeaux: 'Coffrets cadeaux' };
+let produits = [], photos = [], editing = -1, pendingImage = '';
+const preview = u => (u ? $('#p-preview').setAttribute('src', u) : $('#p-preview').removeAttribute('src'));
+
+function toast(msg, error = false) {
+  const t = $('#toast');
+  t.textContent = msg; t.classList.toggle('is-error', error); t.classList.add('is-on');
+  clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('is-on'), error ? 6000 : 2200);
+}
+
+async function call(method, url, body, type = 'application/json') {
+  const res = await fetch(url, { method, body: type === 'application/json' ? JSON.stringify(body) : body, headers: { 'Content-Type': type } });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || 'Erreur, réessayez');
+  return data;
+}
+
+// Photo réduite à 1600 px dans le navigateur avant l'envoi (plus rapide, site plus léger)
+async function upload(file) {
+  let blob = file;
+  try {
+    const bmp = await createImageBitmap(file);
+    const k = Math.min(1, 1600 / Math.max(bmp.width, bmp.height));
+    const c = Object.assign(document.createElement('canvas'), { width: Math.round(bmp.width * k), height: Math.round(bmp.height * k) });
+    c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+    blob = await new Promise(r => c.toBlob(r, 'image/jpeg', .85));
+  } catch { /* format que le navigateur ne sait pas lire : on laisse le serveur répondre */ }
+  return (await call('POST', '/api/upload', blob, 'application/octet-stream')).image;
+}
+
+async function save(kind) {
+  try {
+    if (kind === 'produits') produits = (await call('PUT', '/api/produits', { produits })).produits;
+    else photos = (await call('PUT', '/api/galerie', { photos })).photos;
+    toast('Enregistré ✓');
+  } catch (e) { toast(e.message, true); await load(); }
+  render();
+}
+
+const move = (list, i, d) => { const j = i + d; if (j < 0 || j >= list.length) return false; [list[i], list[j]] = [list[j], list[i]]; return true; };
+
+function render() {
+  $('#produits').innerHTML = `<button class="add" data-act="new"><span><b>+</b><br>Ajouter un produit</span></button>` +
+    produits.map((p, i) => `<article class="card">
+      <img src="${esc(src(p.image))}" alt="">
+      <div class="card__body"><strong>${esc(p.nom)}</strong><span>${esc(p.prix)} · ${esc(CAT[p.categorie] || '')}</span></div>
+      <div class="card__actions">
+        <button class="mini mini--grow" data-act="edit" data-i="${i}">Modifier</button>
+        <button class="mini" data-act="up" data-i="${i}" aria-label="Avancer « ${esc(p.nom)} »" ${i ? '' : 'disabled'}>←</button>
+        <button class="mini" data-act="down" data-i="${i}" aria-label="Reculer « ${esc(p.nom)} »" ${i < produits.length - 1 ? '' : 'disabled'}>→</button>
+        <button class="mini mini--danger" data-act="del" data-i="${i}" aria-label="Supprimer « ${esc(p.nom)} »">Supprimer</button>
+      </div></article>`).join('');
+
+  $('#galerie').innerHTML = `<button class="add" data-act="gal-add"><span><b>+</b><br>Ajouter des photos</span></button>` +
+    photos.map((ph, i) => `<article class="card card--gal">
+      <img src="${esc(src(ph.image))}" alt="">
+      <div class="card__body"><input class="legend" data-i="${i}" value="${esc(ph.legende)}" placeholder="Légende (facultatif)" aria-label="Légende de la photo ${i + 1}" maxlength="120"></div>
+      <div class="card__actions">
+        <button class="mini" data-act="gal-up" data-i="${i}" aria-label="Avancer la photo ${i + 1}" ${i ? '' : 'disabled'}>←</button>
+        <button class="mini" data-act="gal-down" data-i="${i}" aria-label="Reculer la photo ${i + 1}" ${i < photos.length - 1 ? '' : 'disabled'}>→</button>
+        <button class="mini mini--danger mini--grow" data-act="gal-del" data-i="${i}">Supprimer</button>
+      </div></article>`).join('');
+}
+
+function openForm(i) {
+  editing = i;
+  const p = produits[i] || { categorie: 'bougies' };
+  pendingImage = p.image || '';
+  $('#dlg-title').textContent = i < 0 ? 'Nouveau produit' : 'Modifier le produit';
+  preview(pendingImage && src(pendingImage));
+  $('#p-file').value = '';
+  $('#p-nom').value = p.nom || ''; $('#p-prix').value = p.prix || ''; $('#p-cat').value = p.categorie;
+  $('#p-desc').value = p.description || ''; $('#p-badge').value = p.badge || ''; $('#p-lien').value = p.lien || '';
+  $('#dlg').showModal();
+}
+
+$('#p-file').addEventListener('change', async e => {
+  const f = e.target.files[0]; if (!f) return;
+  preview(URL.createObjectURL(f));
+  $('#p-save').disabled = true; $('#p-save').textContent = 'Envoi de la photo…';
+  try { pendingImage = await upload(f); } catch (err) { toast(err.message, true); preview(pendingImage && src(pendingImage)); }
+  $('#p-save').disabled = false; $('#p-save').textContent = 'Enregistrer';
+});
+
+$('#pform').addEventListener('submit', async e => {
+  e.preventDefault();
+  if (!pendingImage) return toast('Ajoutez une photo du produit', true);
+  const old = produits[editing] || {};
+  const p = { ...old, image: pendingImage, nom: $('#p-nom').value, prix: $('#p-prix').value, categorie: $('#p-cat').value,
+    description: $('#p-desc').value, badge: $('#p-badge').value, lien: $('#p-lien').value, alt: old.alt || $('#p-nom').value };
+  if (editing < 0) produits.unshift(p); else produits[editing] = p;
+  $('#dlg').close();
+  await save('produits');
+});
+$('#p-cancel').addEventListener('click', () => $('#dlg').close());
+
+document.addEventListener('click', async e => {
+  const b = e.target.closest('[data-act]'); if (!b) return;
+  const i = +b.dataset.i, act = b.dataset.act;
+  if (act === 'new') return openForm(-1);
+  if (act === 'edit') return openForm(i);
+  if (act === 'del' && confirm(`Supprimer « ${produits[i].nom} » ?`)) { produits.splice(i, 1); return save('produits'); }
+  if (act === 'up' || act === 'down') { if (move(produits, i, act === 'up' ? -1 : 1)) return save('produits'); }
+  if (act === 'gal-add') return $('#gal-files').click();
+  if (act === 'gal-del' && confirm('Retirer cette photo de la galerie ?')) { photos.splice(i, 1); return save('galerie'); }
+  if (act === 'gal-up' || act === 'gal-down') { if (move(photos, i, act === 'gal-up' ? -1 : 1)) return save('galerie'); }
+});
+
+$('#gal-files').addEventListener('change', async e => {
+  const files = [...e.target.files]; e.target.value = '';
+  if (!files.length) return;
+  $('#galerie').classList.add('busy');
+  toast(`Envoi de ${files.length} photo${files.length > 1 ? 's' : ''}…`);
+  for (const f of files) {
+    try { photos.unshift({ image: await upload(f), legende: '', alt: '' }); }
+    catch (err) { toast(`${f.name} : ${err.message}`, true); }
+  }
+  $('#galerie').classList.remove('busy');
+  await save('galerie');
+});
+
+$('#galerie').addEventListener('change', e => {
+  if (!e.target.matches('.legend')) return;
+  const ph = photos[+e.target.dataset.i];
+  ph.legende = e.target.value; ph.alt = e.target.value;
+  save('galerie');
+});
+
+document.querySelectorAll('[role="tab"]').forEach(t => t.addEventListener('click', () => {
+  document.querySelectorAll('[role="tab"]').forEach(x => {
+    x.setAttribute('aria-selected', x === t);
+    $('#' + x.getAttribute('aria-controls')).hidden = x !== t;
+  });
+}));
+
+async function load() {
+  const [a, b] = await Promise.all(['/data/produits.json', '/data/galerie.json'].map(u => fetch(u, { cache: 'no-store' }).then(r => r.json())));
+  produits = a.produits || []; photos = b.photos || [];
+}
+load().then(render).catch(() => toast('Impossible de charger le contenu. Le serveur est-il lancé ?', true));
+</script>
+</body>
+</html>

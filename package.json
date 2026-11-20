@@ -1,0 +1,10 @@
+{
+  "name": "atelier-val-co",
+  "private": true,
+  "description": "Site Atelier Val & Co + espace admin",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/"
+  },
+  "engines": { "node": ">=18" }
+}
