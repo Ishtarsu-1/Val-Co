@@ -1,0 +1,53 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-20T13:46:02.661Z",
+        "reason": "Claude: fond crème pris sur le papier du logo client (IMG_2991.png), charte DESIGN.md §2"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "deco-florale.html"
+        ],
+        "createdAt": "2026-11-20T13:46:02.669Z",
+        "reason": "Claude: fond crème pris sur le papier du logo client (IMG_2991.png), charte DESIGN.md §2"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "objets-personnalises.html"
+        ],
+        "createdAt": "2026-11-20T13:46:02.676Z",
+        "reason": "Claude: fond crème pris sur le papier du logo client (IMG_2991.png), charte DESIGN.md §2"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "contact.html"
+        ],
+        "createdAt": "2026-11-20T13:46:02.684Z",
+        "reason": "Claude: fond crème pris sur le papier du logo client (IMG_2991.png), charte DESIGN.md §2"
+      },
+      {
+        "rule": "marquee",
+        "value": "*",
+        "files": [
+          "admin/index.html"
+        ],
+        "createdAt": "2026-11-20T14:19:37.548Z",
+        "reason": "Claude: admin/index.html n'a pas de .marquee, règle héritée de css/style.css partagé"
+      }
+    ]
+  }
+}

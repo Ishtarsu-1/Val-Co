@@ -1,0 +1,64 @@
+{
+  "produits": [
+    {
+      "nom": "Bougie parfumée prénom",
+      "description": "Cire végétale, parfum au choix, étiquette personnalisée avec le prénom ou un petit mot.",
+      "prix": "24 €",
+      "categorie": "bougies",
+      "badge": "Personnalisable",
+      "image": "https://images.unsplash.com/photo-1603006905003-be475563bc59?w=700&h=875&q=80&auto=format&fit=crop",
+      "alt": "Bougie parfumée dans un verre",
+      "lien": ""
+    },
+    {
+      "nom": "Mug céramique gravé",
+      "description": "Céramique artisanale, gravure d’un prénom, d’une date ou d’un mot doux.",
+      "prix": "29 €",
+      "categorie": "deco",
+      "badge": "Fait main",
+      "image": "https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=700&h=875&q=80&auto=format&fit=crop",
+      "alt": "Tasses en céramique artisanale",
+      "lien": ""
+    },
+    {
+      "nom": "Bouquet de fleurs séchées",
+      "description": "Pampa, lagurus et fleurs de saison séchées : un bouquet qui dure, avec carte personnalisée.",
+      "prix": "dès 35 €",
+      "categorie": "deco",
+      "badge": "Fleurs séchées",
+      "image": "https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=700&h=875&q=80&auto=format&fit=crop&crop=left",
+      "alt": "Bouquet de pampa et fleurs séchées dans un vase",
+      "lien": ""
+    },
+    {
+      "nom": "Porte-alliances fleuri",
+      "description": "Petit écrin en bois ou lin, orné de fleurs séchées et de vos initiales.",
+      "prix": "39 €",
+      "categorie": "mariage",
+      "badge": "Mariage",
+      "image": "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=700&h=875&q=80&auto=format&fit=crop",
+      "alt": "Alliances posées sur un coussin en lin",
+      "lien": ""
+    },
+    {
+      "nom": "Coffret « Émotions »",
+      "description": "Bougie, mini-bouquet séché et carte manuscrite, dans un coffret prêt à offrir.",
+      "prix": "49 €",
+      "categorie": "cadeaux",
+      "badge": "Coffret",
+      "image": "https://images.unsplash.com/photo-1513201099705-a9746e1e201f?w=700&h=875&q=80&auto=format&fit=crop",
+      "alt": "Coffret cadeau emballé en papier kraft",
+      "lien": ""
+    },
+    {
+      "nom": "Bougie témoin",
+      "description": "« Veux-tu être mon témoin ? » : la jolie façon de poser la question, personnalisée.",
+      "prix": "22 €",
+      "categorie": "bougies",
+      "badge": "Mariage",
+      "image": "https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?w=700&h=875&q=80&auto=format&fit=crop",
+      "alt": "Bougie allumée dans une ambiance cosy",
+      "lien": ""
+    }
+  ]
+}

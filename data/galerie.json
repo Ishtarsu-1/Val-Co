@@ -1,0 +1,44 @@
+{
+  "photos": [
+    {
+      "image": "https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=800&q=80&auto=format",
+      "legende": "Bouquet de mariée champêtre",
+      "alt": "Bouquet de mariée roses pêche et eucalyptus"
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=80&auto=format",
+      "legende": "Table de réception",
+      "alt": "Longue table de réception décorée de petits bouquets"
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=80&auto=format",
+      "legende": "Chaises des mariés",
+      "alt": "Chaises des mariés décorées de fleurs sur une pelouse"
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=800&q=80&auto=format",
+      "legende": "Composition poudrée",
+      "alt": "Composition de roses poudrées dans un pot"
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=800&q=80&auto=format",
+      "legende": "Cérémonie laïque",
+      "alt": "Allée de cérémonie fleurie en extérieur"
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=800&q=80&auto=format",
+      "legende": "Bouquet de saison",
+      "alt": "Bouquet de tulipes roses dans un vase"
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80&auto=format",
+      "legende": "Sortie de cérémonie",
+      "alt": "Mariés entourés de leurs invités sous une pluie de pétales"
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&q=80&auto=format",
+      "legende": "Le jour J",
+      "alt": "Mains des mariés avec bouquet"
+    }
+  ]
+}
