@@ -69,11 +69,17 @@ renderInto(document.querySelector('#produits'), 'data/produits.json', ({ produit
     <div class="product__body">
       <h3>${esc(p.nom)}</h3>
       <p>${esc(p.description)}</p>
-      <div class="product__foot"><span class="price">${esc(p.prix)}</span><a class="btn" href="${esc(safeUrl(p.lien) || SHOP_URL)}" target="_blank" rel="noopener">Voir</a></div>
+      <div class="product__foot"><span class="price">${esc(p.prix)}</span><a class="btn" href="${esc(safeUrl(p.lien) || SHOP_URL)}" target="_blank" rel="noopener" aria-label="Commander ${esc(p.nom)} sur la boutique (nouvel onglet)">Commander<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a></div>
     </div>
   </article>`).join(''));
 
-renderInto(document.querySelector('#galerie'), 'data/galerie.json', ({ photos = [] }) => photos.map(ph => `
+// Galerie : pas de photo déjà visible ailleurs sur la page ; data-limit pour l'aperçu de l'accueil
+const galerie = document.querySelector('#galerie');
+const surLaPage = new Set([...document.images].map(i => i.src.split('?')[0]));
+renderInto(galerie, 'data/galerie.json', ({ photos = [] }) => photos
+  .filter(ph => !surLaPage.has(String(ph.image).split('?')[0]))
+  .slice(0, +galerie.dataset.limit || undefined)
+  .map(ph => `
   <figure data-reveal><img src="${esc(safeUrl(ph.image))}" alt="${esc(ph.alt || ph.legende)}" loading="lazy">${ph.legende ? `<figcaption>${esc(ph.legende)}</figcaption>` : ''}</figure>`).join(''));
 
 // Parallaxe légère (rAF)

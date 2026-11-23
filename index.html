@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Atelier Val & Co — Fleurs, créations & émotions · Gironde</title>
   <meta name="description" content="Atelier Val & Co : décoration florale pour mariages et événements, et objets personnalisés faits main en Gironde. Bohème, champêtre, élégant.">
+  <meta property="og:title" content="Atelier Val & Co — Fleurs, créations & émotions · Gironde">
+  <meta property="og:description" content="Atelier Val & Co : décoration florale pour mariages et événements, et objets personnalisés faits main en Gironde. Bohème, champêtre, élégant.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- shortcut: og:image demande une URL absolue, à ajouter au déploiement (assets/og-image.jpg, 1200×630) -->
   <link rel="icon" href="assets/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,7 +77,7 @@
             </div>
           </a>
           <a class="path" href="objets-personnalises.html" data-reveal style="--d:150ms">
-            <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=1200&q=80&auto=format&fit=crop" alt="Tasses en céramique artisanale" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=1200&h=1500&q=80&auto=format&fit=crop&crop=left" alt="Bouquet de fleurs séchées dans un vase" loading="lazy">
             <div class="path__body">
               <h3>Objets personnalisés</h3>
               <p>Bougies, céramiques, fleurs séchées, coffrets cadeaux… des créations uniques à votre prénom, à commander en ligne.</p>
@@ -92,8 +98,8 @@
             <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=1000&q=80&auto=format&fit=crop" alt="Bouquet de roses poudrées noué de toile de jute, posé sur une table en bois" width="1000" height="1250">
           </div>
           <figure class="pola board__pola" data-reveal style="--d:700ms">
-            <img src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=500&q=80&auto=format&fit=crop" alt="Bouquet de mariée aux roses pêche et eucalyptus" width="500" height="500">
-            <figcaption>Bouquet de mariée</figcaption>
+            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=500&q=80&auto=format&fit=crop" alt="Longue table de réception décorée de petits bouquets" width="500" height="500">
+            <figcaption>Table de réception</figcaption>
           </figure>
           <aside class="note board__note" data-saison data-reveal style="--d:900ms">
             <p class="note__title" data-saison-mois>De saison à l’atelier</p>
@@ -116,6 +122,20 @@
       </div>
     </section>
 
+    <!-- APERÇU GALERIE (data/galerie.json, modifiable via /admin) -->
+    <section class="section">
+      <div class="container">
+        <div class="intro">
+          <div>
+            <h2 data-reveal="title">Derniers décors de l’atelier</h2>
+          </div>
+          <p data-reveal style="--d:150ms">Bouquets, tables, cérémonies : un aperçu des mariages et événements fleuris ces derniers mois.</p>
+        </div>
+        <div class="gallery gallery--preview" id="galerie" data-limit="4"></div>
+        <p class="gallery__more"><a class="btn btn--ghost" href="deco-florale.html#realisations">Voir toutes les réalisations</a></p>
+      </div>
+    </section>
+
     <!-- CTA -->
     <section class="section cta">
       <img class="cta__sprig cta__sprig--l" src="assets/brin.png" alt="">
@@ -134,7 +154,7 @@
       <div class="footer__grid">
         <div>
           <img class="footer__logo" src="assets/logo-atelier.png" alt="Atelier Val & Co" loading="lazy">
-          <p style="color:var(--muted);margin-top:16px;max-width:34ch">Fleurs, créations & émotions. Décoration florale & objets personnalisés en Gironde.</p>
+          <p class="footer__tagline">Fleurs, créations & émotions. Décoration florale & objets personnalisés en Gironde.</p>
         </div>
         <div>
           <h4>L’atelier</h4>

@@ -57,6 +57,7 @@ Interdit : Inter/Roboto en titre, script en paragraphe, gras > 600. Pas de dégr
 - **Hero d’accueil** : grand logo centré + titre + brins dessinés + aquarelle. C’est l’entrée validée par la cliente : ne pas y toucher.
 - **Planche d’atelier** (section « à propos ») : photo en arche + tirage scotché avec légende manuscrite (`.pola`) + étiquette kraft (`.note`).
 - **Étiquette kraft** `.note` : « En <mois> à l’atelier » remplie par JS selon le mois (`[data-saison]`), aussi en haut des pages Déco et Objets, et pour les infos de devis sur Contact.
+- **Aperçu galerie** (accueil) : `#galerie[data-limit="4"]`, grille régulière 4 → 2 colonnes, photos 4/5 ; la galerie ignore les photos déjà affichées ailleurs sur la page.
 - **Prestations** (déco) : liste éditoriale titre / description séparée par des filets, sans icônes.
 - **Carte « univers »** (accueil) : grande image + voile, titre serif, flèche qui glisse au hover.
 - **Nav** : transparente en haut, au scroll → fond `--paper` à 92% + `backdrop-filter: blur(10px)` + filet bas. Lien actif : point bronze sous le texte. Mobile : menu plein écran.
