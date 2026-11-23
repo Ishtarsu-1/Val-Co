@@ -4,7 +4,6 @@
 const SHOP_URL = 'https://atelier-valandco.myshopify.com';
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const canHover = matchMedia('(hover: hover)').matches;
 
 // Liens boutique : data-shop="/products/xxx" → SHOP_URL + chemin
 document.querySelectorAll('[data-shop]').forEach(a => {
@@ -93,32 +92,26 @@ if (!reduced && parallax.length) {
   update();
 }
 
-if (canHover && !reduced) {
-  // Boutons magnétiques
-  document.querySelectorAll('.magnet').forEach(el => {
-    let raf;
-    el.addEventListener('pointermove', e => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const r = el.getBoundingClientRect();
-        el.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .25}px, ${(e.clientY - r.top - r.height / 2) * .35}px)`;
-      });
-    });
-    el.addEventListener('pointerleave', () => { cancelAnimationFrame(raf); el.style.transform = ''; });
-  });
-  // Halo qui suit la souris sur les cartes univers
-  document.querySelectorAll('.path').forEach(el => {
-    let raf;
-    el.addEventListener('pointermove', e => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const r = el.getBoundingClientRect();
-        el.style.setProperty('--mx', `${e.clientX - r.left}px`);
-        el.style.setProperty('--my', `${e.clientY - r.top}px`);
-      });
-    });
-  });
-}
+// Note « de saison » : fleurs du mois en France, mise à jour automatiquement
+const SAISON = [
+  ['janvier', 'anémones, renoncules, hellébores, premiers mimosas'],
+  ['février', 'mimosa, anémones, renoncules, tulipes'],
+  ['mars', 'tulipes, jonquilles, renoncules, branches en fleurs'],
+  ['avril', 'tulipes, lilas, renoncules, fritillaires'],
+  ['mai', 'pivoines, lilas, muguet, roses de jardin'],
+  ['juin', 'pivoines, roses de jardin, astrances, delphiniums'],
+  ['juillet', 'roses de jardin, lavande, cosmos, scabieuses'],
+  ['août', 'dahlias, cosmos, zinnias, scabieuses'],
+  ['septembre', 'dahlias, hortensias, cosmos, amarantes'],
+  ['octobre', 'dahlias, hortensias, chrysanthèmes, amarantes'],
+  ['novembre', 'hortensias séchés, chrysanthèmes, eucalyptus, baies'],
+  ['décembre', 'amaryllis, hellébores, eucalyptus, branches de pin'],
+];
+document.querySelectorAll('[data-saison]').forEach(el => {
+  const [mois, fleurs] = SAISON[new Date().getMonth()];
+  el.querySelector('[data-saison-mois]').textContent = `En ${mois} à l’atelier`;
+  el.querySelector('[data-saison-fleurs]').textContent = fleurs;
+});
 
 // Filtres produits
 const filters = document.querySelectorAll('.filter');

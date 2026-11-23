@@ -38,7 +38,8 @@ https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,50
 | Display H1 | Cormorant Garamond 500 | clamp(2.8rem, 7vw, 5.6rem) | lh 1.02 |
 | H2 | Cormorant Garamond 500 | clamp(2rem, 4.5vw, 3.4rem) | lh 1.1 |
 | H3 | Cormorant Garamond 600 | 1.5rem | |
-| Petits labels (footer, formulaire) | Jost 400 MAJ | .72rem | letter-spacing .2–.28em (comme « ATELIER ») — jamais en kicker au-dessus d’un titre |
+| Boutons, nav, tags | Jost 400 MAJ | .72–.8rem | letter-spacing .14–.2em, en écho à « ATELIER » du logo |
+| Libellés (formulaire, footer, contact) | Jost 400 / Cormorant 500 | .92rem / 1.3rem | casse normale |
 | Script | Allura | 1.6–2.4rem | accent émotionnel, 1 par section max |
 | Body | Jost 300 | 1.05rem | lh 1.75 |
 | Prix / label | Jost 500 | .95rem | |
@@ -53,7 +54,11 @@ Interdit : Inter/Roboto en titre, script en paragraphe, gras > 600. Pas de dégr
 - **Bouton ghost** `.btn--ghost` : bordure 1px `--bronze`, fond transparent → hover fond `--bronze` texte `--cream`.
 - **Lien** : souligné fin animé (background-size 0→100%).
 - **Carte produit** : fond `--cream`, radius 6px, image ratio 4/5 zoom 1.06 au hover, ombre `--shadow-2` au hover, focus-within outline.
-- **Carte « univers »** (accueil) : grande image + voile, spotlight radial suivant la souris (`--mx/--my`), titre serif, flèche qui glisse au hover.
+- **Hero d’accueil** : grand logo centré + titre + brins dessinés + aquarelle. C’est l’entrée validée par la cliente : ne pas y toucher.
+- **Planche d’atelier** (section « à propos ») : photo en arche + tirage scotché avec légende manuscrite (`.pola`) + étiquette kraft (`.note`).
+- **Étiquette kraft** `.note` : « En <mois> à l’atelier » remplie par JS selon le mois (`[data-saison]`), aussi en haut des pages Déco et Objets, et pour les infos de devis sur Contact.
+- **Prestations** (déco) : liste éditoriale titre / description séparée par des filets, sans icônes.
+- **Carte « univers »** (accueil) : grande image + voile, titre serif, flèche qui glisse au hover.
 - **Nav** : transparente en haut, au scroll → fond `--paper` à 92% + `backdrop-filter: blur(10px)` + filet bas. Lien actif : point bronze sous le texte. Mobile : menu plein écran.
 - **Champs de formulaire** : fond `--cream`, bordure 1px `--line`, focus → bordure `--bronze` ; invalide (après saisie) → bordure `--error`. Disabled → opacité .5.
 - **Tag** `.tag` : Jost .72rem MAJ, bordure 1px, radius 999px.
@@ -80,25 +85,25 @@ Vanilla CSS + IntersectionObserver, zéro dépendance.
 
 | Catégorie | Implémentation |
 |---|---|
-| Texte H1 | Révélation mot par mot par masque (`.split` → spans translateY 110% → 0, stagger 90ms) |
-| Texte H2 | `[data-reveal="title"]` : clip-path de bas en haut au scroll |
-| Texte corps / eyebrow | fade-up 24px, stagger via `--d` |
-| Élément | CTA magnétique (rAF), zoom d'image au hover des cartes |
-| Composant | Cartes « univers » spotlight + galerie masonry avec légende qui glisse |
-| Fond | Taches « aquarelle » blush/sage qui dérivent lentement (transform only) + grain papier |
-| Bande | Marquee « Bohème • Champêtre • Élégant • Gironde » (CSS translateX) |
+| Texte H1 | Révélation mot par mot par masque (`.split`), seul moment orchestré |
+| Texte / images | fade-up 24px, clip-path pour titres et arches, stagger via `--d` |
+| Composant | Zoom d'image au hover des cartes, légende de galerie qui glisse |
 | Parallaxe | `[data-parallax]` translateY léger, rAF |
 | Nav | état scrollé |
 | Clin d'œil | Le cœur du footer fait éclore de petits pétales au survol/clic |
 
+| Fond | Aquarelle qui dérive, uniquement dans le hero d’accueil |
+
+Retirés volontairement (effet « template ») : bandeau défilant, boutons magnétiques, halo souris, tampon qui tourne, aquarelle des pages internes.
+
 Easing : `cubic-bezier(.22,.61,.36,1)` ; durées 600–900ms.
-`prefers-reduced-motion: reduce` → animations et transitions ~0, contenu visible directement, marquee figée.
+`prefers-reduced-motion: reduce` → animations et transitions ~0, contenu visible directement.
 
 ## 8. Do's and Don'ts
 
 **Do**
 1. Garder le crème comme fond dominant (≥ 70% de la surface).
-2. Capitales espacées réservées aux petits labels (footer, champs), en écho à « ATELIER » ; pas de kicker au-dessus des titres.
+2. Capitales espacées réservées aux boutons, nav et tags ; libellés et titres en casse normale.
 3. Une seule phrase en script Allura par section.
 4. Photos lumineuses, tons chauds, beaucoup d'air autour.
 5. Toujours un chemin clair vers « Demander un devis » ou « Voir la boutique ».
