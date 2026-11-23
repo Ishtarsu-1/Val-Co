@@ -19,7 +19,8 @@ Charte graphique : voir `DESIGN.md`.
 ## À personnaliser avant mise en ligne
 1. **Boutique** : `js/main.js` → `SHOP_URL` (URL Shopify/Etsy). Chaque bouton produit a `data-shop="/products/..."` = chemin du produit.
 2. **Formulaire** : créer un formulaire sur formspree.io et remplacer `VOTRE_ID` dans `contact.html`.
-3. **E-mail / Instagram / Facebook** : liens dans les footers et `contact.html`.
+3. **Réseaux** : `js/main.js` → `RESEAUX` (Instagram, Facebook, numéro WhatsApp au format 33612345678) et `WHATSAPP_MESSAGE`. Le pseudo Instagram affiché sur `contact.html` est à ajuster à la main.
+4. **E-mail** : dans les footers et `contact.html`.
 4. **Photos & produits** : les images Unsplash sont provisoires → la cliente les remplace depuis `/admin` (voir ci-dessous).
 
 ## Espace admin (pour la cliente) — `/admin/`

@@ -3,6 +3,15 @@
 // Adresse de la boutique en ligne (Shopify, Etsy…). À remplacer par la vraie URL.
 const SHOP_URL = 'https://atelier-valandco.myshopify.com';
 
+// Réseaux sociaux : liens du pied de page et de la page Contact. À remplacer par les vrais comptes.
+// WhatsApp : numéro au format international, sans « + » ni espaces (ex. 33612345678).
+const RESEAUX = {
+  instagram: 'https://www.instagram.com/',
+  facebook: 'https://www.facebook.com/',
+  whatsapp: '',
+};
+const WHATSAPP_MESSAGE = 'Bonjour Val, je vous contacte depuis votre site à propos de…';
+
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Liens boutique : data-shop="/products/xxx" → SHOP_URL + chemin
@@ -10,6 +19,14 @@ document.querySelectorAll('[data-shop]').forEach(a => {
   a.href = SHOP_URL + (a.dataset.shop || '');
   a.target = '_blank';
   a.rel = 'noopener';
+});
+
+// Liens réseaux : data-social="instagram|facebook|whatsapp"
+document.querySelectorAll('[data-social]').forEach(a => {
+  const reseau = a.dataset.social;
+  a.href = reseau === 'whatsapp'
+    ? `https://wa.me/${RESEAUX.whatsapp}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`
+    : RESEAUX[reseau] || a.href;
 });
 
 // Navigation
