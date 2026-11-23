@@ -94,12 +94,16 @@ p { margin: 0 0 1em; }
 /* ---------- Navigation ---------- */
 .nav {
   position: fixed; inset: 0 0 auto; z-index: 50; padding-block: 18px;
-  transition: background .4s var(--ease), padding .4s var(--ease), box-shadow .4s var(--ease);
+  transition: padding .4s var(--ease), box-shadow .4s var(--ease);
 }
-.nav.is-scrolled {
+/* Flou sur un pseudo-élément : un backdrop-filter sur .nav emprisonnerait le menu mobile (position: fixed) dans la barre */
+.nav::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0;
   background: rgb(var(--paper-rgb) / .92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  padding-block: 10px; box-shadow: 0 1px 0 var(--line);
+  transition: opacity .4s var(--ease);
 }
+.nav.is-scrolled { padding-block: 10px; box-shadow: 0 1px 0 var(--line); }
+.nav.is-scrolled::before { opacity: 1; }
 .nav__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .nav__logo { display: flex; align-items: center; min-height: 44px; }
 .nav__logo img { height: 52px; width: auto; transition: height .4s var(--ease); }
@@ -136,7 +140,12 @@ p { margin: 0 0 1em; }
     background: var(--paper); opacity: 0; visibility: hidden; transition: opacity .4s var(--ease), visibility .4s;
   }
   .nav.is-open .nav__links { opacity: 1; visibility: visible; }
-  .nav__links a:not(.btn) { font: 400 1.9rem/1.2 var(--serif); color: var(--bronze); }
+  .nav__links a:not(.btn) {
+    font: 500 clamp(1.7rem, 7vw, 2.2rem)/1.15 var(--serif); letter-spacing: 0; text-transform: none;
+    color: var(--bronze); text-align: center; padding-inline: var(--gutter);
+  }
+  .nav__links a:not(.btn)::after { bottom: -4px; width: 5px; height: 5px; }
+  .nav__links .btn { margin-top: 12px; min-height: 52px; padding: 1em 2.4em; font-size: .82rem; }
 }
 
 /* ---------- Fond aquarelle ---------- */

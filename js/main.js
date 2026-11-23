@@ -28,7 +28,11 @@ document.querySelectorAll('.nav__links a').forEach(a => a.addEventListener('clic
   toggle?.setAttribute('aria-expanded', 'false');
   document.body.style.overflow = '';
 }));
-addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('is-open')) toggle.click(); });
+addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('is-open')) { toggle.click(); toggle.focus(); } });
+// Menu ouvert puis écran agrandi (rotation, redimensionnement) : on le referme
+matchMedia('(min-width: 861px)').addEventListener('change', e => {
+  if (e.matches && nav.classList.contains('is-open')) toggle.click();
+});
 
 // Titres découpés mot par mot
 document.querySelectorAll('.split').forEach(el => {
